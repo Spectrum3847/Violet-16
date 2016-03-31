@@ -28,16 +28,20 @@ public class Dashboard {
     		SmartDashboard.putNumber("Drive: High Quick Turn Sensitivity", 0.5);
     		SmartDashboard.putNumber("Drive: Low Quick Turn Sensitivity", 0.5);
     		SmartDashboard.putNumber("Intake: Front Speed", 1.0);
-    		SmartDashboard.putNumber("Intake: Rear Speed", 0.6);
+    		SmartDashboard.putNumber("Intake: Rear Speed", 0.4);
     		SmartDashboard.putNumber("Intake: Eject Front Speed", -1.0);
-    		SmartDashboard.putNumber("Intake: Eject Rear Speed", -0.6);
+    		SmartDashboard.putNumber("Intake: Eject Rear Speed", -0.8);
     		SmartDashboard.putNumber("Intake: Portcullis Speed", -0.5);
     		SmartDashboard.putNumber("Intake: Feed Ball Speed", 1);
-    		SmartDashboard.putNumber("Intake: Ball Delay", 10);
-    		SmartDashboard.putNumber("Shooter: Layup Speed", 0.8);
+    		SmartDashboard.putNumber("Intake: Ball Delay", 1);
+    		SmartDashboard.putNumber("Shooter: Layup Speed", 0.6);
     		SmartDashboard.putNumber("Shooter: Reverse Speed", -0.8);
     		SmartDashboard.putBoolean("Compressor", true);
     		SmartDashboard.putBoolean("Disabled Rear Camera?", false);	
+    		SmartDashboard.putNumber("Auton Cross Time", 6);
+    		SmartDashboard.putNumber("Auton Speed", -1);
+    		SmartDashboard.putNumber("Winch Current Limit", 20);
+    		SmartDashboard.putBoolean("Scale Limit Switches Enabled?", false);
     	}
     }
 
@@ -49,13 +53,24 @@ public class Dashboard {
     	SmartDashboard.putNumber("Drive Trigger Right: ", HW.Driver_Gamepad.getRightTrigger());
     	SmartDashboard.putNumber("Drive Left:", Robot.leftDrive.get());
     	SmartDashboard.putNumber("Drive Right:", Robot.rightDrive.get());
-    	SmartDashboard.putNumber("NavX Angle", Robot.navX.getAngle());
-    	SmartDashboard.putNumber("NavX Roll", Robot.navX.getRoll());
-    	SmartDashboard.putNumber("NavX Pitch", Robot.navX.getPitch());
     	SmartDashboard.putNumber("Left Encoder Value Raw", Robot.drive.m_left_encoder.getRaw());
     	SmartDashboard.putNumber("Right Encoder Value Raw", Robot.drive.m_right_encoder.getRaw());
     	SmartDashboard.putNumber("Left Encoder Value", Robot.drive.m_left_encoder.get());
     	SmartDashboard.putNumber("Right Encoder Value", Robot.drive.m_right_encoder.get());
+    	SmartDashboard.putBoolean("Lock", Robot.intakeSol.getLockState());
+    	SmartDashboard.putNumber("Shooter Current Speed", Robot.shooterMotors.get());
+    	SmartDashboard.putBoolean("Shooter on?", (Robot.shooter.getSpeed() != 0));
+    	SmartDashboard.putBoolean("High Gear?", Robot.shiftSol.isExtened());
+    	if (Robot.navX != null){
+    		SmartDashboard.putNumber("NavX Angle", Robot.navX.getAngle());
+    		SmartDashboard.putNumber("NavX Roll", Robot.navX.getRoll());
+    		SmartDashboard.putNumber("NavX Pitch", Robot.navX.getPitch());
+    	}
+    	
+    	SmartDashboard.putNumber("Scale Current", Robot.scale.getCurrent());
+    	SmartDashboard.putNumber("Scale Motor 1 Current", HW.PDP.getCurrent(HW.Winch_1_PDP));
+    	SmartDashboard.putNumber("Scale Motor 1 Current", HW.PDP.getCurrent(HW.Winch_2_PDP));
+    	
     	//Robot.navX.DataMonitor();
     	
     }

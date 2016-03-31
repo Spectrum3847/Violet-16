@@ -1,12 +1,14 @@
 package org.spectrum3847.robot;
 
 import org.spectrum3847.lib.drivers.Gamepad;
+import org.spectrum3847.robot.commands.AimingLightOn;
 import org.spectrum3847.robot.commands.CANRunAtSetpoint;
 import org.spectrum3847.robot.commands.EjectBall;
 import org.spectrum3847.robot.commands.FeedBallToShooter;
 import org.spectrum3847.robot.commands.IntakeBall;
 import org.spectrum3847.robot.commands.IntakeDown;
 import org.spectrum3847.robot.commands.IntakePortcullis;
+import org.spectrum3847.robot.commands.LayupShooterSpeed;
 import org.spectrum3847.robot.commands.SetShooterSpeed;
 import org.spectrum3847.robot.commands.SolenoidCommand;
 import org.spectrum3847.robot.commands.StopIntake;
@@ -67,7 +69,9 @@ public class OI {
     								new IntakePortcullis(Robot.intake)
     								);
     	
-    	HW.Driver_Gamepad.getButton(Gamepad.A_BUTTON).whenPressed(new ToggleCameras());
+    	//HW.Driver_Gamepad.getButton(Gamepad.A_BUTTON).whenPressed(new ToggleCameras());
+    	
+    	//HW.Driver_Gamepad.getButton(Gamepad.Y_BUTTON).toggleWhenPressed(new AimingLightOn());
     	
 
     	HW.Operator_Gamepad.getButton(Gamepad.B_BUTTON).toggleWhenPressed(
@@ -76,9 +80,12 @@ public class OI {
     	HW.Operator_Gamepad.getButton(Gamepad.RIGHT_BUMPER).whenPressed(
     								new IntakeBall(
     								Robot.intake));
+    	
     	HW.Operator_Gamepad.getButton(Gamepad.RIGHT_BUMPER).whenReleased(
 				new StopIntake(
 				Robot.intake));
+    	
+    	
     	
     	HW.Operator_Gamepad.getButton(Gamepad.LEFT_BUMPER).whileHeld(
     	    							new EjectBall(
@@ -89,9 +96,9 @@ public class OI {
 										Robot.intake));
     	
     	HW.Operator_Gamepad.getButton(Gamepad.Y_BUTTON).toggleWhenPressed(
-    											new SetShooterSpeed(
-    											Robot.shooter, SmartDashboard.getNumber("Shooter: Layup Speed")
+    											new LayupShooterSpeed(
     											));
+    	HW.Operator_Gamepad.getButton(Gamepad.Y_BUTTON).toggleWhenPressed(new AimingLightOn());
     	
     	HW.Operator_Gamepad.getButton(Gamepad.A_BUTTON).toggleWhenPressed(
 												new SetShooterSpeed(

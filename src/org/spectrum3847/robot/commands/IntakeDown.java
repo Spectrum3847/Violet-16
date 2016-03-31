@@ -29,8 +29,8 @@ public class IntakeDown extends CommandBase {
 
 	@Override
 	protected void execute() {
-		if (t > 200) {     
-            intakePosition.resetLock();;
+		if (t > 100) {     
+            intakePosition.resetLock();
         }
         t++;
 		// TODO Auto-generated method stub
@@ -47,8 +47,8 @@ public class IntakeDown extends CommandBase {
 	 * When the command ends return it to the other position
 	 */
 	protected void end() {
+        intakePosition.resetLock();
 		intakePosition.extend();
-
 	}
 
 	@Override

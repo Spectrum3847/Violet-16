@@ -6,19 +6,23 @@ import org.spectrum3847.lib.drivers.SpectrumEncoder;
 import org.spectrum3847.lib.drivers.SpectrumSpeedController;
 import org.spectrum3847.lib.drivers.SpectrumSpeedControllerCAN;
 import org.spectrum3847.lib.util.Debugger;
+import org.spectrum3847.robot.commands.ManualScale;
+import org.spectrum3847.robot.subsystems.AimingLight;
 import org.spectrum3847.robot.subsystems.Cameras;
 import org.spectrum3847.robot.subsystems.Drive;
 import org.spectrum3847.robot.subsystems.Intake;
 import org.spectrum3847.robot.subsystems.IntakePosition;
 import org.spectrum3847.robot.subsystems.MotorSubsystem;
+import org.spectrum3847.robot.subsystems.ScaleSubsystem;
 import org.spectrum3847.robot.subsystems.ShooterNoPID;
 import org.spectrum3847.robot.subsystems.SolenoidSubsystem;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.I2C;;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -60,6 +64,8 @@ public class Robot extends IterativeRobot {
 	public static Compressor compressor;
 	public static Cameras cams;
 	public static SpecAHRS navX;
+	public static AimingLight light;
+	public static ScaleSubsystem scale;
 	
     public static void setupSubsystems(){
     	compressor = new Compressor(0);
@@ -89,8 +95,8 @@ public class Robot extends IterativeRobot {
     						);
     	
     	CANTalon shooter1 = new CANTalon(HW.SHOOTER_MOTOR_1_3);
-    	shooter1.setInverted(true);
     	CANTalon shooter2 = new CANTalon(HW.SHOOTER_MOTOR_2_4);
+    	shooter2.setInverted(true);
     	
     	shooterMotors = new SpectrumSpeedController(
     		new SpeedController[] {shooter1, shooter2}, 
@@ -100,19 +106,32 @@ public class Robot extends IterativeRobot {
     	
     	shooter = new ShooterNoPID("Shooter", shooterMotors);
     	
-    	catTail = new MotorSubsystem("Cat Tail", HW.CAT_TAIL_MOTOR_5, HW.CAT_TAIL_PDP, 0.5, -0.5);
+    	//catTail = new MotorSubsystem("Cat Tail", HW.CAT_TAIL_MOTOR_5, HW.CAT_TAIL_PDP, 0.5, -0.5);
     	
     	//Setup a Solenoid Subsystem and give it an initial state
     	shiftSol = new SolenoidSubsystem("Shift Solenoid", HW.SHIFTING_SOL_HIGH_5);
     	shiftSol.retract();
-    	intakeSol = new IntakePosition("Intake Position", HW.INTAKE_SOL_UP_6, HW.INTAKE_SOL_DOWN_1, HW.INTAKE_LOCK_2);
+    	intakeSol = new IntakePosition("Intake Position", HW.INTAKE_SOL_UP_6, HW.INTAKE_SOL_DOWN_1, 3);
     	intakeSol.extend();
     	
     	SpectrumSpeedControllerCAN in775 = new SpectrumSpeedControllerCAN(new CANTalon(HW.INTAKE_775_1), HW.INTAKE_775_PDP);
     	SpectrumSpeedControllerCAN inBAG = new SpectrumSpeedControllerCAN(new CANTalon(HW.INTAKE_BAG_2), HW.INTAKE_BAG_PDP);
+    	in775.setInverted(true);
     	
     	intake = new Intake("Intake", in775, inBAG, HW.BALL_SENSOR_2 );
-    	cams = new Cameras();
+    	//cams = new Cameras();
+    	
+    	//setupNavX();
+    	
+    	light = new AimingLight();
+    	Talon scaleTalon1 = new Talon(HW.Winch_1_4);
+    	Talon scaleTalon2 = new Talon(HW.Winch_2_5);
+    	scale = new ScaleSubsystem(scaleTalon1, scaleTalon2);
+
+        Debugger.println("Robot Init Finished /n", Robot.input, Debugger.error5);
+    }
+    
+    private static void setupNavX(){
     	try {
             /* Communicate w/navX MXP via the MXP SPI Bus.                                     */
             /* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
@@ -145,10 +164,13 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	initDebugger();
-    	printGeneralInfo("Start robotInit()");
+        Debugger.println("Start robotInit()", Robot.input, Debugger.error5);
     	setupSubsystems(); //This has to be before the OI is created on the next line
+        Debugger.println("Subsystem Finished \n", Robot.input, Debugger.error5);
         Dashboard.intializeDashboard();
+        Debugger.println("Dashboard Finished \n", Robot.input, Debugger.error5);
 		HW.oi = new OI();
+        Debugger.println("OI Finished \n", Robot.input, Debugger.error5);
     }
     
     private static void initDebugger(){

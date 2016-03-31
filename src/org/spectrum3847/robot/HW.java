@@ -48,8 +48,8 @@ public class HW {
 	/**MOTOR ASSIGNMENTS (PWM)**/
     public static final int RIGHT_REAR_DRIVE_MOTOR_0 = 0;
     public static final int RIGHT_FRONT_DRIVE_MOTOR_1 = 1;
-    public static final int PWM_2 = 8;
-    public static final int PWM_3 = 9;
+    public static final int PWM_2 = 2;
+    public static final int PWM_3 = 3;
     public static final int Winch_1_4 = 4;
     public static final int Winch_2_5 = 5;
     public static final int PWM_6 = 6;
@@ -80,8 +80,8 @@ public class HW {
     public static final int LEFT_ENCODER_1 = 1;
     public static final int BALL_SENSOR_2 = 2;
     public static final int DIGITAL_IO_3 = 3;
-    public static final int DIGITAL_IO_4 = 4; 
-    public static final int DIGITAL_IO_5 = 5;
+    public static final int ScaleDownLimit_4 = 4; 
+    public static final int ScaleUpLimit_5 = 5;
     public static final int DIGITAL_IO_6 = 6; 
     public static final int DIGITAL_IO_7 = 7; 
     public static final int RIGHT_ENCODER_8 = 8;
@@ -90,7 +90,6 @@ public class HW {
     /**Pneumatics**/
     public static final int SOL_0 = 0;
     public static final int INTAKE_SOL_DOWN_1 = 1;
-    public static final int INTAKE_LOCK_2 = 2;
     public static final int SOL_3 = 3;
     public static final int SOL_4 = 4;
     public static final int SHIFTING_SOL_HIGH_5 = 5;
@@ -98,13 +97,13 @@ public class HW {
     public static final int SOL_7 = 7;
     
     /**ANALOG SENSOR ALLOCATIONS**/
-    public static final int ANALOG_IN_0 = 0;
+    public static final int PRESSURE_TRANSDUCEDR_0 = 0;
     public static final int ANALOG_IN_1 = 1;
     public static final int ANALOG_IN_2 = 2;
     public static final int ANALOG_IN_3 = 3;
     
     /**RELAY ALLOCATIONS**/
-    public static final int RELAY_ZERO = 0;
+    public static final int AIMING_LIGHT_0 = 0;
     public static final int RELAY_ONE = 1;
     public static final int RELAY_TWO = 2;
     public static final int RELAY_THREE = 3;

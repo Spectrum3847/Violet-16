@@ -1,5 +1,6 @@
 package org.spectrum3847.robot;
 
+import org.spectrum3847.lib.util.Debugger;
 import org.spectrum3847.robot.commands.StreamCamera;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -16,11 +17,8 @@ public class Disabled {
 
     public static void init() {
         Scheduler.getInstance().removeAll();
-    	Robot.cams.toggleCamera();
-        Robot.cams.streamActiveCamera();
     	//Robot.cams.toggleCamera();
-    	//Robot.cams.toggleCamera();
-    	//Robot.cams.toggleCamera();
+        //Robot.cams.streamActiveCamera();
     }
     
     /*public static void usb4javsStuff(){
@@ -67,7 +65,7 @@ public class Disabled {
         //Flash a light on the dashboard while disabled, know that the dashboard is refreshing.
     	flash();
         Dashboard.updateDashboard();     
-        Robot.cams.streamCamerasWhileDisabled();
+        //Robot.cams.streamCamerasWhileDisabled();
     }
     
     private static void flash(){

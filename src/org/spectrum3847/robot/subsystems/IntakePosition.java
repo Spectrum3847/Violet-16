@@ -4,6 +4,7 @@ import org.spectrum3847.lib.drivers.SpectrumSolenoid;
 import org.spectrum3847.lib.util.Debugger;
 import org.spectrum3847.robot.Robot;
 
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -15,22 +16,23 @@ public class IntakePosition extends Subsystem {
 
 	private SpectrumSolenoid extendSol;
 	private SpectrumSolenoid retractSol;
-	private SpectrumSolenoid lockSol;
+	private Relay lockRelay;
 	private Boolean isExtended = false;
 	private Boolean isDouble = false;
 	private String name;
 	
-	public IntakePosition(String n, SpectrumSolenoid e, SpectrumSolenoid r, SpectrumSolenoid l) {
+	public IntakePosition(String n, SpectrumSolenoid e, SpectrumSolenoid r, Relay l) {
 		super(n);
 		name = n; 
 		extendSol = e;
 		retractSol = r;
-		lockSol = l;
+		lockRelay = l;
+		lockRelay.setDirection(Relay.Direction.kForward);
 		isDouble = true;
 	}
 	
 	public IntakePosition(String n, int e, int r, int l){
-		this(n, new SpectrumSolenoid(e), new SpectrumSolenoid(r), new SpectrumSolenoid(l));
+		this(n, new SpectrumSolenoid(e), new SpectrumSolenoid(r), new Relay(l));
 	}
 
 	@Override
@@ -50,17 +52,26 @@ public class IntakePosition extends Subsystem {
 
 	public void retract(){
 		extendSol.set(false);
-		lockSol.set(true);
+		lockRelay.set(Relay.Value.kOn);
 		retractSol.set(true);
 		isExtended = false;
 		Debugger.println(name +": Retract", Robot.output, Debugger.info3);
 	}
 	
 	public void resetLock(){
-		lockSol.set(false);
+		lockRelay.set(Relay.Value.kOff);;
 	}
 	
 	public boolean isExtened(){
 		return isExtended;
+	}
+	
+	public boolean getLockState(){
+		if (lockRelay.get() == Relay.Value.kOn){
+			return true;
+		} else{
+			return false;
+		}
+		
 	}
 }
