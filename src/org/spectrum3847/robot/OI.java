@@ -9,10 +9,12 @@ import org.spectrum3847.robot.commands.IntakeBall;
 import org.spectrum3847.robot.commands.IntakeDown;
 import org.spectrum3847.robot.commands.IntakePortcullis;
 import org.spectrum3847.robot.commands.LayupShooterSpeed;
+import org.spectrum3847.robot.commands.SetShooterPID;
 import org.spectrum3847.robot.commands.SetShooterSpeed;
 import org.spectrum3847.robot.commands.SolenoidCommand;
 import org.spectrum3847.robot.commands.StopIntake;
 import org.spectrum3847.robot.commands.ToggleCameras;
+import org.spectrum3847.robot.commands.VibrateController;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -61,7 +63,10 @@ public class OI {
     								new SolenoidCommand("Shift to High",
     								Robot.shiftSol,
     								true));
-
+    	HW.Driver_Gamepad.getButton(Gamepad.RIGHT_BUMPER).whenPressed(
+    								new VibrateController("Shift Vibrate", HW.Driver_Gamepad, .5, (float) 0.9)
+    								);
+    	
     	HW.Driver_Gamepad.getButton(Gamepad.LEFT_BUMPER).toggleWhenPressed(
     								intakePos);
     	
@@ -69,7 +74,7 @@ public class OI {
     								new IntakePortcullis(Robot.intake)
     								);
     	
-    	//HW.Driver_Gamepad.getButton(Gamepad.A_BUTTON).whenPressed(new ToggleCameras());
+    	HW.Driver_Gamepad.getButton(Gamepad.A_BUTTON).whenPressed(new ToggleCameras());
     	
     	//HW.Driver_Gamepad.getButton(Gamepad.Y_BUTTON).toggleWhenPressed(new AimingLightOn());
     	
@@ -95,15 +100,19 @@ public class OI {
 										new FeedBallToShooter(
 										Robot.intake));
     	
-    	HW.Operator_Gamepad.getButton(Gamepad.Y_BUTTON).toggleWhenPressed(
-    											new LayupShooterSpeed(
-    											));
+    	//HW.Operator_Gamepad.getButton(Gamepad.Y_BUTTON).toggleWhenPressed(
+    	//										new LayupShooterSpeed(
+    	//										));
+    	
     	HW.Operator_Gamepad.getButton(Gamepad.Y_BUTTON).toggleWhenPressed(new AimingLightOn());
     	
-    	HW.Operator_Gamepad.getButton(Gamepad.A_BUTTON).toggleWhenPressed(
-												new SetShooterSpeed(
-												Robot.shooter, SmartDashboard.getNumber("Shooter: Reverse Speed")
-												));
+    	//HW.Operator_Gamepad.getButton(Gamepad.A_BUTTON).toggleWhenPressed(
+		//										new SetShooterSpeed(
+		//										Robot.shooter, SmartDashboard.getNumber("Shooter: Reverse Speed")
+		//									));
+    
+    	HW.Operator_Gamepad.getButton(Gamepad.Y_BUTTON).toggleWhenPressed(new SetShooterPID(true));
+    	HW.Operator_Gamepad.getButton(Gamepad.A_BUTTON).toggleWhenPressed(new SetShooterPID(false));
     	
     }
 }

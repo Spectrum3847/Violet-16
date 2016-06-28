@@ -19,6 +19,8 @@ public class Disabled {
         Scheduler.getInstance().removeAll();
     	//Robot.cams.toggleCamera();
         //Robot.cams.streamActiveCamera();
+        HW.Driver_Gamepad.rumble(0);
+        HW.Operator_Gamepad.rumble(0);
     }
     
     /*public static void usb4javsStuff(){
@@ -65,7 +67,7 @@ public class Disabled {
         //Flash a light on the dashboard while disabled, know that the dashboard is refreshing.
     	flash();
         Dashboard.updateDashboard();     
-        //Robot.cams.streamCamerasWhileDisabled();
+        Robot.cams.streamCamerasWhileDisabled();
     }
     
     private static void flash(){

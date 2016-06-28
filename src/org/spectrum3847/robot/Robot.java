@@ -15,6 +15,7 @@ import org.spectrum3847.robot.subsystems.IntakePosition;
 import org.spectrum3847.robot.subsystems.MotorSubsystem;
 import org.spectrum3847.robot.subsystems.ScaleSubsystem;
 import org.spectrum3847.robot.subsystems.ShooterNoPID;
+import org.spectrum3847.robot.subsystems.ShooterPID;
 import org.spectrum3847.robot.subsystems.SolenoidSubsystem;
 
 import edu.wpi.first.wpilibj.Compressor;
@@ -60,12 +61,16 @@ public class Robot extends IterativeRobot {
 	public static IntakePosition intakeSol;
 	public static SpectrumSpeedController shooterMotors;
 	public static ShooterNoPID shooter;
+	public static SpectrumSpeedControllerCAN shooterMotorsPID;
+	public static ShooterPID shooterPID;
 	public static MotorSubsystem catTail;
 	public static Compressor compressor;
 	public static Cameras cams;
 	public static SpecAHRS navX;
 	public static AimingLight light;
 	public static ScaleSubsystem scale;
+	public static CANTalon shooterPID1;
+	public static CANTalon shooterPID2;
 	
     public static void setupSubsystems(){
     	compressor = new Compressor(0);
@@ -94,7 +99,7 @@ public class Robot extends IterativeRobot {
     						new SpectrumEncoder(HW.LEFT_ENCODER_0, HW.LEFT_ENCODER_1, 240), new SpectrumEncoder(HW.RIGHT_ENCODER_8, HW.RIGHT_ENCODER_9, 240)
     						);
     	
-    	CANTalon shooter1 = new CANTalon(HW.SHOOTER_MOTOR_1_3);
+    	/*CANTalon shooter1 = new CANTalon(HW.SHOOTER_MOTOR_1_3);
     	CANTalon shooter2 = new CANTalon(HW.SHOOTER_MOTOR_2_4);
     	shooter2.setInverted(true);
     	
@@ -103,15 +108,30 @@ public class Robot extends IterativeRobot {
     		new int[] {HW.SHOOTER_1_PDP, HW.SHOOTER_2_PDP}
     	);
     	
-    	
     	shooter = new ShooterNoPID("Shooter", shooterMotors);
+    	*/
+    	
+    	shooterPID1 = new CANTalon(HW.SHOOTER_PID_1_7);
+    	shooterPID2 = new CANTalon(HW.SHOOTER_PID_2_4);
+    	//shooterPID1.reverseOutput(true);
+    	shooterPID1.changeControlMode(CANTalon.TalonControlMode.Speed);
+    	shooterPID1.reverseSensor(true);
+    	shooterMotorsPID = new SpectrumSpeedControllerCAN(shooterPID1, 1);
+    	
+    	shooterPID = new ShooterPID("shooters", shooterMotorsPID, 1, -1);
+    	shooterPID2.changeControlMode(CANTalon.TalonControlMode.Follower);
+    	shooterPID2.set(shooterPID1.getDeviceID());
+    	shooterPID2.ConfigFwdLimitSwitchNormallyOpen(true);
+    	shooterPID2.ConfigRevLimitSwitchNormallyOpen(true);
+    	shooterPID2.enableReverseSoftLimit(false);
+    	shooterPID2.enableForwardSoftLimit(false);
     	
     	//catTail = new MotorSubsystem("Cat Tail", HW.CAT_TAIL_MOTOR_5, HW.CAT_TAIL_PDP, 0.5, -0.5);
     	
     	//Setup a Solenoid Subsystem and give it an initial state
     	shiftSol = new SolenoidSubsystem("Shift Solenoid", HW.SHIFTING_SOL_HIGH_5);
     	shiftSol.retract();
-    	intakeSol = new IntakePosition("Intake Position", HW.INTAKE_SOL_UP_6, HW.INTAKE_SOL_DOWN_1, 3);
+    	intakeSol = new IntakePosition("Intake Position", HW.INTAKE_SOL_UP_6, HW.INTAKE_SOL_DOWN_2, 3);
     	intakeSol.extend();
     	
     	SpectrumSpeedControllerCAN in775 = new SpectrumSpeedControllerCAN(new CANTalon(HW.INTAKE_775_1), HW.INTAKE_775_PDP);
@@ -119,13 +139,13 @@ public class Robot extends IterativeRobot {
     	in775.setInverted(true);
     	
     	intake = new Intake("Intake", in775, inBAG, HW.BALL_SENSOR_2 );
-    	//cams = new Cameras();
+    	cams = new Cameras();
     	
     	//setupNavX();
     	
     	light = new AimingLight();
-    	Talon scaleTalon1 = new Talon(HW.Winch_1_4);
-    	Talon scaleTalon2 = new Talon(HW.Winch_2_5);
+    	CANTalon scaleTalon1 = new CANTalon(HW.WINCH_CAN_1_3);
+    	CANTalon scaleTalon2 = new CANTalon(HW.WINCH_CAN_2_5);
     	scale = new ScaleSubsystem(scaleTalon1, scaleTalon2);
 
         Debugger.println("Robot Init Finished /n", Robot.input, Debugger.error5);

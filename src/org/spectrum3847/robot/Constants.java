@@ -6,6 +6,7 @@ public class Constants {
 	public static double kDriveSensitivity = .75;
     public static double kNegativeInertiaScalar = 5.0;
 
+    /*
     // Operator controls
     public static double kElevatorJogFastPwm = 1.0;
     public static double kElevatorJogMediumPwm = .7;
@@ -18,9 +19,11 @@ public class Constants {
     public static double kCanIntakeSlowSpeed = .25;
     public static double kCanIntakeSpeed = .3;
     public static double kSpinnyThingSpeed = .65;
-
-    public static double kPeacockUpManualPWM = .45;
+	*/
+    
+   /* public static double kPeacockUpManualPWM = .45;
     public static double kPeacockDownManualPWM = .1;
+    
     // Auto mode stuff
     public static double kPeacockDriveDelayTime = .3;
 
@@ -31,7 +34,8 @@ public class Constants {
     public static double kElevatorCarriagePositionKv = 0.02;
     public static double kElevatorCarriagePositionKa = 6.0E-4;
     public static double kElevatorOnTargetError = 0.125;
-
+    */
+    
     // DriveStraightController gains
     public static double kDriveMaxSpeedInchesPerSec = 120.0;
     public static double kDriveMaxAccelInchesPerSec2 = 107.0;
@@ -56,6 +60,7 @@ public class Constants {
     public static double kTurnKa = 0.075;
     public static double kTurnOnTargetError = 0.0225;
 
+    /*
     // Height presets
     public static double kCoopTopHeight = 40;
     public static double kCoopBottomHeight = 10.75;
@@ -64,19 +69,21 @@ public class Constants {
     public static double kCanPickupStartBottomHeight = 6.75;
     public static double kCanPickupEndTopHeight = 5.25;
     public static double kCanPickupEndBottomHeight = 1.0;
-
+     */
+    
     // Sensor calibration
-    public static double kBreambeamVoltage = 1.0;
+    //public static double kBreambeamVoltage = 1.0;
 
     // Common carriage parameters
-    public static double kElevatorMaxSpeedInchesPerSec = 72.0;
-    public static double kElevatorMaxAccelInchesPerSec2 = 120.0;
+    //public static double kElevatorMaxSpeedInchesPerSec = 72.0;
+    //public static double kElevatorMaxAccelInchesPerSec2 = 120.0;
 
     // !!! End of editable Constants! !!!
     public static int kEndEditableArea = 0;
 
     // !!! Electrical constants (do not change at runtime, lol)
     // Motors
+    /*
     public static int kLeftDriveMotorPWM = 4;
     public static int kLeftDriveMotor1PDP = 14;
     public static int kLeftDriveMotor2PDP = 15;
@@ -84,7 +91,7 @@ public class Constants {
     public static int kRightDriveMotorPWM = 5;
     public static int kRightDriveMotor1PDP = 0;
     public static int kRightDriveMotor2PDP = 1;
-
+    
     public static int kLeftPeacockMotorPWM = 0;
     public static int kLeftPeacockMotorPDP = 0;
     public static int kRightPeacockMotorPWM = 9;
@@ -104,7 +111,9 @@ public class Constants {
     public static int kLeftIntakeMotorPDP = 11;
     public static int kRightIntakeMotorPWM = 8;
     public static int kRightIntakeMotorPDP = 4;
-
+	*/
+    
+    /*
     // DIO
     public static int kLeftDriveEncoderDIOA = 12; // Flipped for polarity
     public static int kLeftDriveEncoderDIOB = 13; // Flipped for polarity
@@ -120,7 +129,9 @@ public class Constants {
 
     // Analog I/O
     public static int kBreakbeamPort = 0;
-
+	*/
+    
+    /*
     // Solenoids
     public static int kBottomCarriageBrakeSolenoidPort = 7;
     public static int kTopCarriageBrakeSolenoidPort = 6;
@@ -133,22 +144,26 @@ public class Constants {
     public static int kCoopSolenoidPort = 8;
     public static int kPinballWizardSolenoidPort = 5;
     public static int kPeacockSolenoidPort = 11;
+	*/
 
-
+    /*
     // Relays
     public static int kCompressorRelayPort = 0;
-
+     */
+    
+    /*
     // !!! Physical constants
     public static double kElevatorPulleyRadiusInches = 0.564;
     public static double kElevatorEncoderCountsPerRev = 250.0;
     public static double kBottomCarriageHeight = 1.5;
+	*/
 
-
+    
     // !!! Program constants
     public static double kControlLoopsDt = 0.005;
 
     // !!! Control loop constants
-
+/*
     public static double kElevatorCarriageSafetyMarginInches = -0.5;
 
     // Top carriage limits
@@ -163,9 +178,10 @@ public class Constants {
     public static double kBottomCarriageMaxPositionInches = 65.0;
     public static double kBottomCarriageHomePositionInches = 0.0;
     public static double kBottomCarriageReZeroPositionInches = 0.0;
-
+	*/
+    
     // Drive parameters
-    public static double kDriveEncoderCountsPerRev = 250.0;
-    public static double kDriveWheelSizeInches = 3.875;
+    public static double kDriveEncoderCountsPerRev = 1375;
+    public static double kDriveWheelSizeInches = 7.875;
 
 }

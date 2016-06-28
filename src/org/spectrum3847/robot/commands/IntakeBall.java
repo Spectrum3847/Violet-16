@@ -34,8 +34,11 @@ public class IntakeBall extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	if (intake.isBall()){
-    		if (t >  SmartDashboard.getNumber("Intake: Ball Delay", 20)) {
-                t = 0;
+    		if (t > (SmartDashboard.getNumber("Intake: Ball Delay", 2) /2)) {
+    			intake.set(.2, .2);
+    		}
+    		if (t >  SmartDashboard.getNumber("Intake: Ball Delay", 2)) {
+    			t = 0;
         		return true;
             }
             t++;

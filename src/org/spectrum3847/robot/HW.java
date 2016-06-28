@@ -71,9 +71,12 @@ public class HW {
     /**NON-DRIVEBASE MOTOR ASSIGNMENTS (CAN)**/
     public static final int INTAKE_775_1 = 1;
     public static final int INTAKE_BAG_2 = 2;
-    public static final int SHOOTER_MOTOR_1_3 = 3;
-    public static final int SHOOTER_MOTOR_2_4 = 4;
-    public static final int CAT_TAIL_MOTOR_5 = 5;
+    public static final int SHOOTER_MOTOR_1_3 = 8;
+    public static final int SHOOTER_MOTOR_2_4 = 9;
+    public static final int WINCH_CAN_1_3 = 3;
+    public static final int WINCH_CAN_2_5 = 5;
+    public static final int SHOOTER_PID_1_7 = 7;
+    public static final int SHOOTER_PID_2_4	 = 4	;
     
     /**DIGITAL SENSOR ALLOCATIONS**/
     public static final int LEFT_ENCODER_0 = 0; 
@@ -89,7 +92,7 @@ public class HW {
     
     /**Pneumatics**/
     public static final int SOL_0 = 0;
-    public static final int INTAKE_SOL_DOWN_1 = 1;
+    public static final int INTAKE_SOL_DOWN_2 = 2;
     public static final int SOL_3 = 3;
     public static final int SOL_4 = 4;
     public static final int SHIFTING_SOL_HIGH_5 = 5;
@@ -117,7 +120,7 @@ public class HW {
     public static final int DSControllerPort = 5;
     
     /**CAMERA NAMES**/
-    public static final String FRONT_CAMERA = "cam2";
-    public static final String REAR_CAMERA = "cam3";
+    public static final String FRONT_CAMERA = "cam0";
+    public static final String REAR_CAMERA = "cam1";
     
 }

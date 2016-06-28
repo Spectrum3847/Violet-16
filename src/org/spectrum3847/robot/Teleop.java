@@ -4,6 +4,8 @@ import org.spectrum3847.lib.drivers.CheesyDriveHelper;
 import org.spectrum3847.lib.drivers.DriveSignal;
 import org.spectrum3847.lib.drivers.Gamepad;
 import org.spectrum3847.robot.commands.CompressorControl;
+import org.spectrum3847.robot.commands.ShooterRumble;
+
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 
@@ -16,6 +18,7 @@ public class Teleop {
         Scheduler.getInstance().removeAll();
         CompressorControl compressorControl = new CompressorControl(Robot.compressor);
         compressorControl.start();
+        new ShooterRumble().start();
     }
 
     public static void periodic() {

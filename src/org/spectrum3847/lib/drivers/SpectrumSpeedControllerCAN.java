@@ -4,6 +4,8 @@ import org.spectrum3847.lib.util.Debugger;
 import org.spectrum3847.robot.HW;
 import org.spectrum3847.robot.Robot;
 
+import edu.wpi.first.wpilibj.CANSpeedController;
+import edu.wpi.first.wpilibj.CANSpeedController.ControlMode;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.SpeedController;
 
@@ -105,4 +107,9 @@ public class SpectrumSpeedControllerCAN implements SpeedController {
             controller.set(0);;
         }
     }
+    
+    public void setSpeedMode(){
+    	m_controllers[1].changeControlMode(CANTalon.TalonControlMode.Speed);
+    }
+
 }
