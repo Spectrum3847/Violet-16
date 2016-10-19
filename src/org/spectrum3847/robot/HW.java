@@ -120,7 +120,7 @@ public class HW {
     public static final int DSControllerPort = 5;
     
     /**CAMERA NAMES**/
-    public static final String FRONT_CAMERA = "cam0";
+    public static final String FRONT_CAMERA = "cam3";
     public static final String REAR_CAMERA = "cam1";
     
 }

@@ -47,7 +47,7 @@ public class Dashboard {
     		SmartDashboard.putNumber("Auton Distance", 7);
     		SmartDashboard.putNumber("Winch Current Limit", 20);
     		SmartDashboard.putBoolean("Scale Limit Switches Enabled?", true);
-    		SmartDashboard.putNumber("Shooter PID Layup Speed", -15000);
+    		SmartDashboard.putNumber("Shooter PID Layup Speed", -15500);
     		SmartDashboard.putNumber("Shooter PID Low Goal Speed", 18000);
     		SmartDashboard.putNumber("Shooter P", .13);
     		SmartDashboard.putNumber("Shooter I", 0);
